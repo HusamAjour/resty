@@ -1,0 +1,19 @@
+$form-background: #f5f5f5;
+$history-background: #efefef;
+
+.middle-section{
+    padding: 50px;
+    background-color: $form-background;
+}
+
+.form-result{
+    border: 1px solid #dfdfdf;
+    background-color: $history-background;
+    min-height: 300px;
+    padding: 20px;
+}
+
+form{
+    text-align: center;
+    margin-bottom: 30px;
+}
