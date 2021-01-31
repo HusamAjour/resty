@@ -1,0 +1,11 @@
+$primary-color : #363636;
+$text-color: #e7e7e7;
+header{
+    padding: 30px;
+    background-color: $primary-color;
+    h1{
+        text-align: center;
+        margin: 0;
+        color: $text-color;
+    }
+}
