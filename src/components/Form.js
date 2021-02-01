@@ -4,7 +4,10 @@ import '../style/Form.scss';
 class Form extends Component {
   constructor(props) {
     super(props);
-    this.state = { method: '', url: '' };
+    this.state = {
+      method: 'get',
+      url: '',
+    };
   }
   changeHanlder = (e) => {
     this.setState({ url: e.target.value });
@@ -14,20 +17,22 @@ class Form extends Component {
     this.setState({ method: e.target.value });
   };
 
-  setValues = (e) => {
+  fetchData = async (e) => {
     e.preventDefault();
-    let par = document.getElementById('resultText');
-    par.innerHTML = `<p><span>${this.state.method}</span> ${this.state.url}</p>`;
-    this.setState({ url: '' });
+    let results = await fetch(this.state.url, {
+      method: this.state.method,
+    });
+    let res = await results.json();
+    this.props.getData(res.count, res.results);
   };
 
   render() {
     return (
       <React.Fragment>
         <section className="middle-section">
-          <form onSubmit={this.setValues}>
+          <form onSubmit={this.fetchData}>
             <div>
-              <label>URL</label>
+              <label>URL</label>{' '}
               <input
                 id="urlText"
                 value={this.state.url}
@@ -35,10 +40,10 @@ class Form extends Component {
                 onChange={this.changeHanlder}
                 required
               />
-              <button type="submit">Go</button>
-            </div>
+              <button type="submit">Go</button>{' '}
+            </div>{' '}
             <div className="radio-btns">
-              <label for="get">
+              <label>
                 <input
                   type="radio"
                   name="method"
@@ -49,18 +54,18 @@ class Form extends Component {
                 />
                 GET
               </label>
-              <label for="post">
+
+              <label>
                 <input
                   type="radio"
                   name="method"
                   value="POST"
                   id="post"
                   onClick={this.changeMethodHanlder}
-                />{' '}
+                />
                 POST
               </label>
-
-              <label for="put">
+              <label>
                 <input
                   type="radio"
                   name="method"
@@ -70,8 +75,7 @@ class Form extends Component {
                 />
                 PUT
               </label>
-
-              <label for="delete">
+              <label>
                 <input
                   type="radio"
                   name="method"
@@ -83,7 +87,6 @@ class Form extends Component {
               </label>
             </div>
           </form>
-          <section className="form-result" id="resultText"></section>
         </section>
       </React.Fragment>
     );
