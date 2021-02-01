@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import JSONPretty from 'react-json-pretty';
-
 import '../style/Results.scss';
+
 class Results extends Component {
   constructor(props) {
     super(props);
