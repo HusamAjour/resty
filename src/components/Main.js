@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Results from './Results';
-import History from './History';
 import '../style/Main.scss';
 
 class Main extends Component {
