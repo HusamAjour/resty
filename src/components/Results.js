@@ -12,7 +12,7 @@ class Results extends Component {
         <section className="results-block">
           <div className="form-result">
             <pre>
-            {JSON.stringify({"Count": this.props.receviedCount, "Results": this.props.receviedResults}, null, 2)}
+              {this.props.children}
                 </pre>
           </div>
         </section>
