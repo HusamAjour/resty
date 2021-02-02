@@ -1,0 +1,28 @@
+$post-color: #018000;
+$get-color: #3201ff;
+$delete-color: #ff0f00;
+$put-color: #daa521;
+
+li{
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+li span{
+    display: inline-block;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+li span.GET{
+    background-color: $get-color;
+}
+li span.POST{
+    background-color: $post-color;
+}
+li span.DELETE{
+    background-color: $delete-color;
+}
+li span.PUT{
+    background-color: $put-color;
+}
