@@ -1,11 +1,22 @@
 $primary-color : #363636;
 $text-color: #e7e7e7;
 header{
-    padding: 30px;
+    padding: 30px 10px 10px;
     background-color: $primary-color;
     h1{
         text-align: center;
         margin: 0;
         color: $text-color;
+        margin-bottom: 20px;
+    }
+    ul{
+        padding: 0;
+        display:  flex;
+        justify-content: space-evenly;
+        li{
+            a{
+            color: $text-color;
+        }
+        }
     }
 }

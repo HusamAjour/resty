@@ -1,6 +1,7 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from './components/Header';
-import Form from './components/Form';
+import Home from './components/Home/Home';
 import Main from './components/Main';
 import Footer from './components/Footer';
 import Results from './components/Results';
@@ -27,7 +28,7 @@ class App extends React.Component {
   fetchDataHandler = (headers, results) => {
     this.setState({ headers, results });
   };
-  //<Results receviedHeaders={this.state.headers} receviedResults={this.state.results}/>
+
   updateQueries = (queries) => {
     localStorage.setItem('queries', JSON.stringify(queries));
     console.log(JSON.parse(localStorage.getItem('queries')));
@@ -37,30 +38,44 @@ class App extends React.Component {
 
   getHistoryQuery = (method, url, body) => {
     this.setState({ method, url, body });
+    console.log(this.state.method, this.state.url, this.state.body);
   };
 
   render() {
     return (
       <React.Fragment>
-        <Header />
-        <Form getData={this.fetchDataHandler} queries={this.updateQueries} historyCall = {{method: this.state.method, url: this.state.url, body: this.state.body }} />
-        <Main>
-          <History
-            queries={this.state.queries}
-            getQuery={this.getHistoryQuery}
-          />
-          <Results>
-            {JSON.stringify(
-              {
-                Headers: this.state.headers,
-                Results: this.state.results,
-              },
-              null,
-              2
-            )}
-          </Results>
-        </Main>
-        <Footer />
+        <BrowserRouter>
+          <Header />
+          <Switch>
+            <Route exact path="/">
+              <Home
+                getData={this.fetchDataHandler}
+                queries={this.state.queries}
+                apiData={{
+                  Headers: this.state.headers,
+                  Results: this.state.results,
+                }}
+                addQueries = {this.updateQueries}
+              />
+            </Route>
+            <Route exact path="/history">
+              <Main>
+                <History
+                  queries={this.state.queries}
+                  getQuery={this.getHistoryQuery}
+                />
+              </Main>{' '}
+            </Route>
+            <Route exact path="/help">
+              <div className="help">
+                This front end is to test your api. insert the url and choose
+                the method and you can also insert a body if its needed.
+              </div>
+            </Route>
+          </Switch>
+          <Main />
+          <Footer />
+        </BrowserRouter>
       </React.Fragment>
     );
   }
